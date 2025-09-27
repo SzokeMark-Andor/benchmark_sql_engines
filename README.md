@@ -47,7 +47,7 @@ These benchmarks were executed **locally**. Each engine ran in its own Docker co
 6. **Analyse the data.** Load `all_engines_sf1_sf10_merged.csv` into Pandas or Excel and compute summary statistics. You can reproduce the charts shown in our conversations (geometric mean bars, scale‑up ratios, boxplots) with a few lines of Python. Refer to `benchmark_local.ipynb` for examples.
 
 ## Additional Resources
-
+Get the archive: **[MEGA – Benchmark environment & results](https://mega.nz/folder/v8kzhZgB#8vTCaqSb8tHb_kQxFK6yHQ)**
 The MEGA folder contains the full local benchmark environment, including scripts, zipped engines, and raw results. Key items in the archive:
 
 - **Zipped engine packages**
