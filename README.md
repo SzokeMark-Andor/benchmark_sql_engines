@@ -11,12 +11,12 @@ The following files are included in this repository:
 - `merged_drill_sf1_sf10.xls` – Aggregate results for the **Drill** engine at SF=1 and SF=10.
 - `merged_presto-velox_sf1_sf10.xls` – Aggregate results for the **Presto‑Velox** engine at SF=1 and SF=10.
 - `phoenix_sf1_first3runs_q01_q30_with_q22_placeholders.xls` – Results for the Phoenix engine for the first three runs of `q01.sql` through `q30.sql`. Since `q22.sql` did not run successfully under Phoenix, placeholder rows are included.
-- `merged_all_engines_sf1_sf10.xls` – Consolidated results for all engines and both scale factors.
+- `merged_all_engines_sf1_sf10.xls` – Aggregate results for the **Doris** engine at SF=1 and SF=10.
 - `all_engines_sf1_sf10_merged.csv` – The same consolidated data in CSV format (UTF‑8). This file is easy to load into Pandas or other analysis tools.
 
 Each file contains the following columns:
 
-- **`engine`** – Name of the database engine (e.g., `clickhouse`, `datafusion`, `doris`, `dremio`, `duckdb`, `impala`, `phoenix`, `presto-velox`, `spark`, `trino`).
+- **`engine`** – Name of the database engine (e.g., `clickhouse`, `datafusion`, `doris`, `dremio`, `drill`, `duckdb`, `impala`, `phoenix`, `presto-velox`, `spark`, `trino`).
 - **`query`** – Benchmark query identifier (`q01.sql`–`q30.sql`).
 - **`run`** – Run number (1–3). Three runs were performed per query to reduce variance.
 - **`sf1`** and **`sf10`** – Median runtime (in seconds) at scale factors 1 and 10, respectively. Missing values indicate a run did not complete successfully (e.g., Phoenix `q22.sql`).
@@ -44,7 +44,7 @@ These benchmarks were executed **locally**. Each engine ran in its own Docker co
 
 5. **Merge the results.** Use the provided Python notebooks (`benchmark_local.ipynb`) or scripts (`merge_results.py`) to parse the raw logs and compute per‑query medians and geometric means. These scripts produce per‑engine `.xls` files and the consolidated `all_engines_sf1_sf10_merged.csv`.
 
-6. **Analyse the data.** Load `all_engines_sf1_sf10_merged.csv` into Pandas or Excel and compute summary statistics. You can reproduce the charts shown in our conversations (geometric mean bars, scale‑up ratios, boxplots) with a few lines of Python. Refer to `benchmark_local.ipynb` for examples.
+6. **Analyse the data.** Load `all_engines_sf1_sf10_merged.csv` into Pandas or Excel and compute summary statistics.
 
 ## Additional Resources
 Get the archive: **[MEGA – Benchmark environment & results](https://mega.nz/folder/v8kzhZgB#8vTCaqSb8tHb_kQxFK6yHQ)**
@@ -61,7 +61,7 @@ The MEGA folder contains the full local benchmark environment, including scripts
 
 - **Scripts and notebooks**
   - `benchmark_local/run_sf1.sh` and `run_sf10.sh` – main driver scripts to prepare data, launch containers, and execute all 30 queries three times. They also handle log capture and error checking.
-  - `benchmark_local/benchmark_local.ipynb` – a Jupyter notebook demonstrating how to merge results, compute medians and geometric means, and generate charts. Running this notebook will reproduce the plots discussed in our conversations.
+  - `benchmark_local/benchmark_local.ipynb` – a Jupyter notebook demonstrating how to merge results, compute medians and geometric means, and generate charts.
   - `benchmark_local/docker-compose.yml` – defines the container services (one per engine) and network configuration. Adjust resource limits here if certain containers crash due to memory constraints.
   - `benchmark_local/dremio_smoke_test.sh` – a smoke test used to confirm Dremio connectivity and query execution before running the full benchmark.
   - **Audit query revisions** – updated SQL files with minor fixes for consistent semantics across engines (e.g., replacing unsupported functions or syntax). These revised queries are the ones executed during the benchmarks.
