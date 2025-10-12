@@ -95,4 +95,4 @@ Contributions are welcome! Please open issues or pull requests if you have impro
 
 ---
 
-Thank you for using this benchmark suite. We hope these results help you make informed decisions about SQL engine performance.
+Thank you for using this benchmark suite. I hope these results help you make informed decisions about SQL engine performance.
